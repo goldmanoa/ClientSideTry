@@ -47,9 +47,17 @@
         }
 
         .chartDisplay{
-          height: 74% !important;
-          width: 74% !important;
+          height: 70% !important;
+          width: 70% !important;
         }
+
+        .logo{
+          display: flex;
+          height: 35px;
+          width: 10%;
+          margin-bottom: 2%;
+        }
+
       </style>
 
   </head>
@@ -68,7 +76,9 @@
         <canvas id="myBarChart" class='chartDisplay' width="600" height="400"></canvas>
     </div>
 
-    <div id='footer'>Exelate</div>
+    <div id='footer'>
+      <img src='exelateNielsen.png' class="logo">
+    </div>
 
     <script id='lineChart'>
       var data = {
@@ -157,31 +167,52 @@
 
     <script id='timerLogic'>
 
-    //  $('#barChartSetion').repeat().wait(4000).hide().wait(4000).hide();
+      //  $('#barChartSetion').repeat().wait(4000).hide().wait(4000).hide();
 
-    //  $("#lineChartSection").repeat().wait(4000).show().wait(4000).hide();
+      //  $("#lineChartSection").repeat().wait(4000).show().wait(4000).hide();
 
-    $(document).ready(function(){
+      $(document).ready(function(){
 
-        $("#barChartSetion").hide();
+          $("#barChartSetion").hide();
 
-        function show_second(){
-            $("#lineChartSection").hide();
-            $("#barChartSetion").show();
-            setTimeout(show_first,5000);
-        }
-
-
-        function show_first(){
-            $("#lineChartSection").show();
-            $("#barChartSetion").hide();
-            setTimeout(show_second,5000);
-        }
-
-        setTimeout(show_second,5000);
-    });
+          function show_second(){
+              $("#lineChartSection").hide();
+              $("#barChartSetion").show();
+              setTimeout(show_first,5000);
+          }
 
 
+          function show_first(){
+              $("#lineChartSection").show();
+              $("#barChartSetion").hide();
+              setTimeout(show_second,5000);
+          }
+
+          setTimeout(show_second,5000);
+      });
+
+
+
+    </script>
+
+    <script id='serverLogic'>
+
+      var ajax_call = function() {
+            $.ajax({
+             url: '',
+            error: function() {
+            },
+             dataType: 'json',
+             success: function(data) {
+
+             },
+             type: 'GET'
+            });
+        };
+
+      var interval = 1000 * 60 * 16;
+
+      setInterval(ajax_call, interval);
 
     </script>
 
