@@ -82,62 +82,46 @@
 
     <script id='lineChart'>
 
-      //function to read text file
-      function readTextFile(file, callback) {
-        var rawFile = new XMLHttpRequest();
-        rawFile.overrideMimeType("application/json");
-        rawFile.open("GET", file, true);
-        rawFile.onreadystatechange = function() {
-          if (rawFile.readystate == 4 && rawFile.status == "200") {
-            callback(rawFile.responseText);
-          }
+      function drawLineChart() {
+        var jsonData = $.ajax({
+          url: "https://raw.githubusercontent.com/goldmanoa/ClientSideTry/barbara_changes/historyget209212.json",
+          datatype: 'json',
+        }).done(function (results) {
+
+        function timeConverter(clock){
+          var a = new Date(clock * 1000);
+          var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          var year = a.getFullYear();
+          var month = months[a.getMonth()];
+          var date = a.getDate();
+          var hour = a.getHours();
+          var min = a.getMinutes();
+          var sec = a.getSeconds();
+          var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+          return time;
         }
-        rawFile.send(null);
+        var labels =[], data=[];
+        result["packets"].forEach(function(packet){
+            labels.push(timeConverter(packet.result.clock));
+              data.push(parseFloat(packet.result.value));
+            });
+
+            // Create the chart.js data structure using 'labels' and 'data'
+        var tempData = {
+          labels : labels,
+          datasets : [{
+              fillColor             : "rgba(151,187,205,0.2)",
+              strokeColor           : "rgba(151,187,205,1)",
+              pointColor            : "rgba(151,187,205,1)",
+              pointStrokeColor      : "#fff",
+              pointHighlightFill    : "#fff",
+              pointHighlightStroke  : "rgba(151,187,205,1)",
+              data                  : data
+          }]
+        };
+
+        var ctx = document.getElementById('');
       }
-
-      //usage:
-      readTextFile("historyget209212.json", function(text){
-        var data = JSON.parse(text);
-        console.log(data);
-      });
-
-        //Function to 'load JSON' data
-        // function loadJSON(callback) {
-        //   var xobj = new XMLHttpRequest();
-        //       xobj.overrideMimeType("application/json");
-        //   xobj.open('GET', 'history.get.209212.json', true); // Replace 'my_data' with the path to your file
-        //   xobj.onreadystatechange = function () {
-        //     if (xobj.readystate == 4 && xobj.status == "200") {
-        //       // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined
-        //       callback(xobj.responseText);
-        //     }
-        //   };
-        //   xobj.send(null);
-        // }
-        // var historyclocks = ["1469652772", "1469652712", "1469652652", "1469652592", "1469652532", "1469652472", "1469652412","1469652352", "1469652292", "1469652232"];
-        // var convertedtimes = [];
-        // historyclocks.forEach(function(element){
-        //   convertedtimes.push(timeConverter(element));
-        // });
-        // console.log(convertedtimes);
-        //Run the callback.
-        // function init() {
-        //   loadJSON(function(response) {
-        //     // Parse JSON string into object
-        //     var actual_JSON = JSON.parse(response);
-        //     alert(actual_JSON.result);
-        //   });
-        // }
-        // init();
-        // // Function to 'load JSON' data
-        // function load() {
-        //   var someData_notJSON = JSON.parse(data);
-        //
-        //   var labels = [], data = [];
-        //   someData_notJSON.forEach(function(){
-        //     labels.push(new Date(someData_notJSON.clock*1000);
-        //     data.push(parseFloat(someData_notJSON.value));
-        //   });
 
           // Create the chart.js data structure using 'Labels' and 'data'
         //   var tempData = {
@@ -157,17 +141,16 @@
         //     }]
         //   };
         // }
-      // new Chart(document.getElementById("myChart").getContext('2d') , {
-      //     type: "line",
-      //     data: data,
-      // });
+      new Chart(document.getElementById("myChart").getContext('2d') , {
+          type: "line",
+          data: data,
+      });
 
       // Instantiate a new Chart
-      // var myLineChart = new Chart(ctx).Line(tempData);
+      var myLineChart = new Chart(ctx).Line(tempData);
 
     </script>
-    //
-    // <script id='barChart'>
+    <script id='barChart'>
     //   var theDate = new Date(timeStamp_value)
     //   var data = {
     //   labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -203,7 +186,7 @@
       //   });
 
 
-    // </script>
+    </script>
 
     <script id='dateLogic'>
 
@@ -249,7 +232,7 @@
 
       var ajax_call = function() {
             $.ajax({
-             url: '',
+             url: 'https://raw.githubusercontent.com/goldmanoa/ClientSideTry/barbara_changes/historyget209212.json',
             error: function() {
             },
              dataType: 'json',
