@@ -13,12 +13,14 @@
 
         body{
           background-color: #f7f7f7;
+          font-family: optima;
         }
 
         #header{
           display: flex;
           justify-content: flex-start;
           position: relative;
+          margin-top: 0.5%;
         }
 
         #AppName{
@@ -29,9 +31,11 @@
         }
 
         #DateTime{
-          flex: 0 1 auto;
-          margin-left: auto;
-          font-size: xx-small;
+          height: 30%;
+          width: 7%;
+          display: inline-block;
+          font-size: 60%;
+          margin-left: 0.5%;
         }
 
 
@@ -44,6 +48,7 @@
           margin: 3%;
           display: flex;
           justify-content: center;
+          margin-top: 1.5%;
         }
 
         .chartDisplay{
@@ -85,8 +90,9 @@
         labels: ["January", "February", "March", "April", "May", "June", "July","August", "November", "December"],
         datasets: [
           {
-            backgroundColor: "rgba(12,81,138,0.4)",
+            backgroundColor: "rgba(12,81,138,0.2)",
              borderColor: "rgba(12,81,138,1)",
+               borderWidth: 1.5,
              borderCapStyle: 'butt',
               label: "Sodium intake",
               fillColor: "rgba(220,220,220,0.2)",
@@ -98,8 +104,9 @@
               data: [140, 120, 90, 100, 122, 143, 90]
           },
             {
-              backgroundColor: "rgba(271,176,47,0.4)",
+              backgroundColor: "rgba(271,176,47,0.2)",
                borderColor: "rgba(271,176,47,1)",
+                 borderWidth: 1.5,
                borderCapStyle: 'butt',
                 label: "Sodium intake",
                 fillColor: "rgba(220,220,220,0.2)",
@@ -113,6 +120,7 @@
             {
               backgroundColor: "rgba(249,111,54,0.2)",
                borderColor: "rgba(249,111,54,1)",
+                 borderWidth: 1.5,
                borderCapStyle: 'butt',
                 label: "Sugar intake",
                 pointColor: "rgba(151,187,205,1)",
