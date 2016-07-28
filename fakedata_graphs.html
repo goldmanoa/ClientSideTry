@@ -701,10 +701,20 @@
         }
       var clocksarray = [];
       var valuesarray = [];
+      var fakeSegSold = [];
+      var morefakedata = [];
+      var volumeColor = [];
+      var volumeBorderColor = [];
+      var segmentsColor = [];
       historydata.forEach(function(element){
         clocksarray.push(timeConverter(element.clock));
         valuesarray.push(element.value);
+        fakeSegSold.push(Math.floor(Math.random()*(75000-70000+1)+70000));
+        morefakedata.push(Math.floor(Math.random()*(75000-70000+1)+70000));
+        volumeColor.push('rgba(12,81,138,0.6)');
+        volumeBorderColor.push('rgba(12,81,138,1)');
       });
+
       console.log(clocksarray[5]);
       var data = {
         labels: clocksarray,
@@ -735,7 +745,7 @@
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [16500, 15900, 18000, 18100, 15006, 15500, 14000]
+              data: fakeSegSold
             },
             {
               backgroundColor: "rgba(249,111,54,0.4)",
@@ -747,7 +757,7 @@
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [12800, 14800, 14000, 11900, 18600, 12700, 19000]
+              data: morefakedata
             }
           ]
         }
@@ -766,22 +776,8 @@
       datasets: [
                     {
                       label: "My First dataset",
-                      backgroundColor: [
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                      ],
-                      borderColor: [
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                      ],
+                      backgroundColor: volumeColor,
+                      borderColor: volumeBorderColor,
                       borderWidth: 1,
                       data: valuesarray,
                     },
