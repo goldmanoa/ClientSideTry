@@ -92,10 +92,46 @@
     <div id='footer'>
       <img src='exelateNielsen.png' class="logo">
     </div>
-
+    <script id="timeConverter">
+    function timeConverter(clock){
+      var a = new Date(clock * 1000);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var year = a.getFullYear();
+      var month = months[a.getMonth()];
+      var date = a.getDate();
+      var hour = a.getHours();
+      var min = a.getMinutes();
+      var sec = a.getSeconds();
+      var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+      return time;
+    }
+    </script>
+    <script src="historyget209212.js"></script>
     <script id='lineChart'>
+    var clocksarray = [];
+    var valuesarray = [];
+    var fakeSegSold = [];
+    var morefakedata = [];
+    var volumeColor = [];
+    var volumeBorderColor = [];
+    var segmentsBgColor = [];
+    var segmentsBorderColor = [];
+    var morefakeDataBgColor =[];
+    var morefakeDataBorderColor = [];
+    historydata.result.forEach(function(element){
+      clocksarray.push(timeConverter(element.clock));
+      valuesarray.push(element.value);
+      fakeSegSold.push(Math.floor(Math.random()*(75000-70000+1)+70000));
+      morefakedata.push(Math.floor(Math.random()*(75000-70000+1)+70000));
+      volumeColor.push('rgba(12,81,138,0.6)');
+      volumeBorderColor.push('rgba(12,81,138,1)');
+      segmentsBgColor.push('rgba(271,176,47,0.6)');
+      segmentsBorderColor.push('rgba(271,176,47,1)');
+      morefakeDataBgColor.push('rgba(249,111,54,0.6)');
+      morefakeDataBorderColor.push('rgba(249,111,54,1)');
+    });
       var data = {
-        labels: ["January", "February", "March", "April", "May", "June", "July","August", "November", "December"],
+        labels: clocksarray,
         datasets: [
           {
               backgroundColor: "rgba(12,81,138,0.4)",
@@ -109,7 +145,7 @@
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [140, 120, 90, 100, 122, 143, 90]
+              data: valuesarray
           },
             {
               backgroundColor: "rgba(271,176,47,0.4)",
@@ -123,7 +159,7 @@
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [165, 159, 180, 181, 156, 155, 140]
+              data: fakeSegSold
             },
             {
               backgroundColor: "rgba(249,111,54,0.4)",
@@ -135,7 +171,7 @@
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [128, 148, 140, 119, 186, 127, 190]
+              data: morefakedata
             }
           ]
         }
@@ -150,70 +186,28 @@
     <script id='barChart'>
 
       var data = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: clocksarray,
       datasets: [
                     {
                       label: "My First dataset",
-                      backgroundColor: [
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                          'rgba(12,81,138,0.6)',
-                      ],
-                      borderColor: [
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                          'rgba(12,81,138,1)',
-                      ],
+                      backgroundColor: volumeColor,
+                      borderColor: volumeBorderColor,
                       borderWidth: 1,
-                      data: [65, 59, 80, 81, 56, 55, 40],
+                      data: valuesarray,
                     },
                     {
                       label: "My Second dataset",
-                      backgroundColor: [
-                          'rgba(271,176,47,0.6)',
-                          'rgba(271,176,47,0.6)',
-                          'rgba(271,176,47,0.6)',
-                          'rgba(271,176,47,0.6)',
-                          'rgba(271,176,47,0.6)',
-                          'rgba(271,176,47,0.6)',
-                      ],
-                      borderColor: [
-                          'rgba(271,176,47,1)',
-                          'rgba(271,176,47,1)',
-                          'rgba(271,176,47,1)',
-                          'rgba(271,176,47,1)',
-                          'rgba(271,176,47,1)',
-                          'rgba(271,176,47,1)',
-                      ],
+                      backgroundColor: segmentsBgColor,
+                      borderColor: segmentsBorderColor,
                       borderWidth: 1,
-                      data: [65, 59, 80, 81, 56, 55, 40],
+                      data: fakeSegSold,
                     },
                     {
                       label: "My Second dataset",
-                      backgroundColor: [
-                          'rgba(249,111,54,0.6)',
-                          'rgba(249,111,54,0.6)',
-                          'rgba(249,111,54,0.6)',
-                          'rgba(249,111,54,0.6)',
-                          'rgba(249,111,54,0.6)',
-                          'rgba(249,111,54,0.6)',
-                      ],
-                      borderColor: [
-                          'rgba(249,111,54,1)',
-                          'rgba(249,111,54,1)',
-                          'rgba(249,111,54,1)',
-                          'rgba(249,111,54,1)',
-                          'rgba(249,111,54,1)',
-                          'rgba(249,111,54,1)',
-                      ],
+                      backgroundColor: morefakeDataBgColor,
+                      borderColor: morefakeDataBorderColor,
                       borderWidth: 1,
-                      data: [65, 59, 80, 81, 56, 55, 40],
+                      data: morefakedata,
                     }
                 ]
             };
